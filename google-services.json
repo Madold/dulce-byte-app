@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "850245176593",
+    "project_id": "dulce-bite",
+    "storage_bucket": "dulce-bite.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850245176593:android:88d9055fbf49a79a3010b0",
+        "android_client_info": {
+          "package_name": "com.markusw.dulcebite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "850245176593-195uu4g7hf3shbi2l34rmham202p9fo8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.markusw.dulcebite",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "850245176593-ts0lpig9hob3458u3s94l0p00lguie6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHTK6PWdnxuLGKFA3HE6BQIMQPg2qRty8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "850245176593-ts0lpig9hob3458u3s94l0p00lguie6n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "850245176593-43brgs2umm68tuoekm6kqi2m1lqdlbsh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dulcebite.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
