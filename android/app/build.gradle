@@ -109,9 +109,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.dulcebite.app'
+    namespace 'com.markusw.dulcebite'
     defaultConfig {
-        applicationId 'com.dulcebite.app'
+        applicationId 'com.markusw.dulcebite'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

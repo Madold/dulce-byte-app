@@ -1,4 +1,4 @@
-package com.dulcebite.app
+package com.markusw.dulcebite
 
 import android.app.Application
 import android.content.res.Configuration

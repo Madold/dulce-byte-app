@@ -1,4 +1,4 @@
-package com.dulcebite.app
+package com.markusw.dulcebite
 
 import android.os.Build
 import android.os.Bundle

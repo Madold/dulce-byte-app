@@ -22,7 +22,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.dulcebite.app",
+      "package": "com.markusw.dulcebite",
       "googleServicesFile": "./google-services.json"
     },
     "web": {
