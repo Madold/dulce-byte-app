@@ -1,12 +1,15 @@
 import { Link, Stack } from "expo-router";
-import { Text } from "react-native";
+import { Pressable, Text } from "react-native";
 import { Screen } from "../components";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, increment } from "../store/counter/counterSlice";
 
 export default function Index() {
 
     const insets = useSafeAreaInsets();
+    const { counter } = useSelector(state => state.counter)
+    const dispatch = useDispatch();
 
     return (
         <Screen style={{
@@ -17,8 +20,9 @@ export default function Index() {
                     headerShown: false
                 }}
             />
-            <Text>Chilla</Text>
-            <Link href="/auth">Auth</Link>
+            <Text className="text-3xl font-bold">Pick your</Text>
+            <Text className="text-3xl font-bold text-secondary">Cookie</Text>
+           
         </Screen>
     )
 }
