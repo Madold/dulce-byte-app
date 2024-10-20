@@ -1,18 +1,13 @@
 import { Image, Text, View } from "react-native";
-import { Screen, SearchBar } from "../components";
+import { Screen, SearchBar } from "../../components";
 import { Stack } from "expo-router";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useSelector } from "react-redux";
 import Feather from '@expo/vector-icons/Feather';
-import { useFonts } from "expo-font";
+import { useSelector } from "react-redux";
 
-export default function Home() {
 
-    const insets = useSafeAreaInsets()
-    const { user } = useSelector(state => state.auth)
-    const [fontsLoaded] = useFonts({
-        "Inria-Bold": require("../assets/fonts/InriaSerif-Bold.ttf"),
-    })
+export const Home = () => {
+
+    const { user } = useSelector(state => state.auth);
 
     return (
         <Screen>
