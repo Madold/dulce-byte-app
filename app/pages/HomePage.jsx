@@ -1,8 +1,10 @@
-import { Image, Text, View } from "react-native";
+import { FlatList, Image, ScrollView, Text, View } from "react-native";
 import { Screen, SearchBar } from "../../components";
 import { Stack } from "expo-router";
 import Feather from '@expo/vector-icons/Feather';
 import { useSelector } from "react-redux";
+import { cookies } from "../../data";
+import { CookieCard } from "../../components/CookieCard";
 
 
 export const Home = () => {
@@ -10,7 +12,8 @@ export const Home = () => {
     const { user } = useSelector(state => state.auth);
 
     return (
-        <Screen>
+        <ScrollView>
+            <Screen>
             <Stack.Screen 
                 options={{
                     headerTintColor: "white",
@@ -30,7 +33,18 @@ export const Home = () => {
             <Text style={{fontFamily: "Inria-Bold"}} className="text-5xl mt-5">Escoje tu</Text>
             <Text style={{fontFamily: "Inria-Bold"}} className="text-5xl text-secondary mb-4">Galleta</Text>
             
-            <SearchBar value="" onSearch={() => {}} />
+            <SearchBar style={{
+                marginBottom: 20
+            }} value="" onSearch={() => {}} />
+
+            <FlatList 
+                data={cookies}
+                keyExtractor={ (cookie) => cookie.id }
+                renderItem={ ({ item }) => (<CookieCard cookie={item} />) }
+                horizontal={true}
+            />
+
         </Screen>
+        </ScrollView>
     )
 }

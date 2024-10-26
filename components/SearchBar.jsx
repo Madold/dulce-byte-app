@@ -4,9 +4,9 @@ import { styled } from "nativewind"
 
 const StyledPressable = styled(Pressable)
 
-export const SearchBar = ({value, onQueryChange, onSearch}) => {
+export const SearchBar = ({value, onQueryChange, onSearch, style = {}}) => {
   return (
-    <View className="bg-white flex flex-row items-center rounded-xl w-full">
+    <View style={style} className="bg-white flex flex-row items-center rounded-xl w-full">
         <TextInput
             className="py-3 pl-2 flex-1"
             placeholder="Buscar"
