@@ -3,7 +3,7 @@ import { styled } from "nativewind"
 
 const StyledPressable = styled(Pressable)
 
-export const CookieCard = ({ cookie }) => {
+export const CookieCard = ({ cookie, onAddToCart }) => {
   return (
     <View style={{
       backgroundColor: cookie.enphasisColor,
@@ -13,7 +13,7 @@ export const CookieCard = ({ cookie }) => {
         <View className="flex-1 items-end justify-evenly p-4 h-full">
             <Text className="text-white text-3xl font-bold">{cookie.name}</Text>
             <Text className="text-white">{cookie.description}</Text>
-            <StyledPressable className="bg-primary px-4 py-2 rounded-xl" onPress={() => {}}>
+            <StyledPressable className="bg-primary px-4 py-2 rounded-xl" onPress={onAddToCart}>
               <Text>
                 Add to cart
               </Text>

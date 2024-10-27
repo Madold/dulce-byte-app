@@ -1,50 +1,103 @@
-import { FlatList, Image, ScrollView, Text, View } from "react-native";
+import { FlatList, Image, Text, View } from "react-native";
 import { Screen, SearchBar } from "../../components";
 import { Stack } from "expo-router";
-import Feather from '@expo/vector-icons/Feather';
+import Feather from "@expo/vector-icons/Feather";
 import { useSelector } from "react-redux";
 import { cookies } from "../../data";
 import { CookieCard } from "../../components/CookieCard";
-
+import { useRef } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 
 export const Home = () => {
+  const { user } = useSelector((state) => state.auth);
 
-    const { user } = useSelector(state => state.auth);
+  const bottomSheetRef = useRef(null);
 
-    return (
-        <ScrollView>
-            <Screen>
-            <Stack.Screen 
-                options={{
-                    headerTintColor: "white",
-                    headerShadowVisible: false,
-                    headerLeft: () => (
-                        <Text> Hola, { user.displayName }</Text>
-                    ),
-                    headerRight: () => (
-                        <View className="flex flex-row gap-4 items-center">
-                            <Feather name="archive" size={24} color="black" />
-                            <Image className="rounded-full" source={{ uri: user.photoURL }} style={{ width: 40, height: 40 }} />
-                        </View>
-                    )
-                }}
+  const openBottomSheet = () => {
+    bottomSheetRef.current?.expand();
+  };
+
+  return (
+    <GestureHandlerRootView>
+      <Screen style={{ flex: 1 }}>
+        <Stack.Screen
+          options={{
+            headerTintColor: "white",
+            headerShadowVisible: false,
+            headerLeft: () => <Text>Hola, {user.displayName}</Text>,
+            headerRight: () => (
+              <View className="flex flex-row gap-4 items-center">
+                <Feather name="archive" size={24} color="black" />
+                <Image
+                  className="rounded-full"
+                  source={{ uri: user.photoURL }}
+                  style={{ width: 40, height: 40 }}
+                />
+              </View>
+            ),
+          }}
+        />
+
+        <View style={{ flex: 1 }}>
+          <Text style={{ fontFamily: "Inria-Bold" }} className="text-5xl mt-5">
+            Escoje tu
+          </Text>
+          <Text
+            style={{ fontFamily: "Inria-Bold" }}
+            className="text-5xl text-secondary mb-4"
+          >
+            Galleta
+          </Text>
+
+          <SearchBar
+            style={{
+              marginBottom: 20,
+            }}
+            value=""
+            onSearch={() => {}}
+          />
+
+          <View>
+            <FlatList
+              data={cookies}
+              keyExtractor={(cookie) => cookie.id}
+              renderItem={({ item }) => (
+                <CookieCard cookie={item} onAddToCart={openBottomSheet} />
+              )}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
             />
+          </View>
+        </View>
+      </Screen>
+      <BottomSheet
+        ref={bottomSheetRef}
+        snapPoints={["50%"]}
+        backgroundStyle={{
+          backgroundColor: "#98154E",
+        }}
+        handleIndicatorStyle={{
+          backgroundColor: "#fff",
+        }}
+      >
+        <BottomSheetView>
+          <View className="p-3">
+            <View className="w-full flex flex-row">
+              <View className="flex flex-row items-center gap-2">
+                <View className="bg-primaryVariant p-4 rounded-full">
+                  <Feather name="shopping-cart" size={24} color="#EFDFCE" />
+                </View>
 
-            <Text style={{fontFamily: "Inria-Bold"}} className="text-5xl mt-5">Escoje tu</Text>
-            <Text style={{fontFamily: "Inria-Bold"}} className="text-5xl text-secondary mb-4">Galleta</Text>
-            
-            <SearchBar style={{
-                marginBottom: 20
-            }} value="" onSearch={() => {}} />
-
-            <FlatList 
-                data={cookies}
-                keyExtractor={ (cookie) => cookie.id }
-                renderItem={ ({ item }) => (<CookieCard cookie={item} />) }
-                horizontal={true}
-            />
-
-        </Screen>
-        </ScrollView>
-    )
-}
+                <View>
+                    <Text className="text-xl font-bold text-primary">Shopping cart</Text>
+                    <Text className="text-primary">0 items</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </BottomSheetView>
+      </BottomSheet>
+    </GestureHandlerRootView>
+  );
+};
