@@ -2,10 +2,23 @@ import auth from '@react-native-firebase/auth'
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
 import { finishLogin, login, setAuthenticated, setErrorMessage, setUser, logout as logoutAction } from './authSlice'
 import firestore from '@react-native-firebase/firestore';
+import { setPlacingOrder } from '../home';
+import { Alert } from 'react-native';
 
 GoogleSignin.configure({
     webClientId: "850245176593-ts0lpig9hob3458u3s94l0p00lguie6n.apps.googleusercontent.com"
 })
+
+const order = {
+    id: "",
+    products: [],
+    createdAt: 0,
+    paymentState: "pending",
+    complianceStatus: "pending",
+    total: 0,
+    deliveryAddress: "",
+    deliveryCost: 0
+}
 
 export const signInWithGoogle = () => {
     return async (dispatch) => {
@@ -79,4 +92,18 @@ const saveUserInDb = async (user) => {
     .collection("users")
     .doc(user.uid)
     .set(user)
+}
+
+
+export const placeOrder = () => {
+    return async (dispatch, getState) => {
+        try {
+            
+            // firestore()
+            // .collection("orders")
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }

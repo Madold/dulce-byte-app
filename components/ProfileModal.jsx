@@ -7,12 +7,12 @@ const StyledPressable = styled(Pressable);
 export const ProfileModal = ({ user, visible, onClose, onLogout }) => {
   return (
     <Modal
-          animationType="slide"
+          animationType="fade"
           transparent={true}
           visible={visible}
           onRequestClose={onClose}
         >
-          <View className="w-screen h-screen flex items-center justify-center">
+          <View className="w-screen h-screen flex items-center justify-center bg-[#232222c7]">
             <View className="bg-white p-3 m-4 flex items-center rounded-xl">
               <View className="flex flex-row justify-end w-full">
                 <Pressable onPress={onClose}>

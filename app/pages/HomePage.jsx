@@ -1,4 +1,11 @@
-import { FlatList, Image, Text, View, Pressable } from "react-native";
+import {
+  FlatList,
+  Image,
+  Text,
+  View,
+  Pressable,
+  ActivityIndicator,
+} from "react-native";
 import { Screen, SearchBar } from "../../components";
 import { Stack } from "expo-router";
 import Feather from "@expo/vector-icons/Feather";
@@ -9,24 +16,54 @@ import { useRef, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { styled } from "nativewind";
-import { signOut } from "../../store";
+import { placeOrder, signOut } from "../../store";
 import { ProfileModal } from "../../components/ProfileModal";
+import {
+  addProduct,
+  decreaseProductQuantity,
+  increaseProductQuantity,
+} from "../../store/home";
+import { CartProduct } from "../../components/CartProduct";
+import DialogInput from "react-native-dialog-input";
+import { DeliveryModal } from "../../components/DeliveryModal";
 
 const StyledPressable = styled(Pressable);
 
 export const Home = () => {
+  const { cart, isPlacingOrder } = useSelector((state) => state.home);
   const { user } = useSelector((state) => state.auth);
   const [isModalVisible, setModalVisible] = useState(false);
+  const bottomSheetRef = useRef(null);
+  const [isInputDialogVisible, setInputDialogVisible] = useState(false);
   const dispatch = useDispatch(signOut);
 
   const handleLogout = () => {
     dispatch(signOut());
   };
 
-  const bottomSheetRef = useRef(null);
+  const handlePlaceOrder = () => {
+    setInputDialogVisible(true);
+  };
 
-  const openBottomSheet = () => {
-    bottomSheetRef.current?.expand();
+  const handleSubmitDeliveryInfo = ({ address, phone }) => { 
+    console.log(address, phone);
+  }
+
+  const handleSubmitAddress = (address) => { 
+
+  }
+
+  const hideInputDialog = () => { 
+    setInputDialogVisible(false);
+  }
+
+  const handleAddToCart = (cookie) => {
+    dispatch(
+      addProduct({
+        cookie,
+        quantity: 1,
+      })
+    );
   };
 
   return (
@@ -59,7 +96,13 @@ export const Home = () => {
           onLogout={handleLogout}
         />
 
-        <View style={{ flex: 1 }}>
+        <DeliveryModal 
+          visible={isInputDialogVisible}
+          onClose={hideInputDialog}
+          onSubmit={handleSubmitDeliveryInfo}
+        />
+
+          <View style={{ flex: 1 }}>
           <Text style={{ fontFamily: "Inria-Bold" }} className="text-5xl mt-5">
             Escoje tu
           </Text>
@@ -83,7 +126,7 @@ export const Home = () => {
               data={cookies}
               keyExtractor={(cookie) => cookie.id}
               renderItem={({ item }) => (
-                <CookieCard cookie={item} onAddToCart={openBottomSheet} />
+                <CookieCard cookie={item} onAddToCart={handleAddToCart} />
               )}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
@@ -114,10 +157,39 @@ export const Home = () => {
                   <Text className="text-xl font-bold text-primary">
                     Shopping cart
                   </Text>
-                  <Text className="text-primary">0 items</Text>
+                  <Text className="text-primary">{cart.quantity} items</Text>
                 </View>
               </View>
             </View>
+
+            <FlatList
+              className="mt-4"
+              ItemSeparatorComponent={() => <View className="h-4" />}
+              data={cart.products}
+              keyExtractor={(product) => product.cookie.id}
+              renderItem={({ item }) => (
+                <CartProduct
+                  product={item}
+                  onIncrement={() =>
+                    dispatch(increaseProductQuantity(item.cookie.id))
+                  }
+                  onDecrement={() =>
+                    dispatch(decreaseProductQuantity(item.cookie.id))
+                  }
+                />
+              )}
+            />
+
+            {cart.products.length > 0 && (
+              <StyledPressable
+                disabled={isPlacingOrder}
+                onPress={handlePlaceOrder}
+                className="w-full bg-primary mt-4 p-3 rounded-md flex flex-row justify-center"
+              >
+                <Text className="text-center font-bold mr-3">Place order</Text>
+                {isPlacingOrder && <ActivityIndicator color="#98154E" />}
+              </StyledPressable>
+            )}
           </View>
         </BottomSheetView>
       </BottomSheet>

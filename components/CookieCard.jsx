@@ -13,7 +13,7 @@ export const CookieCard = ({ cookie, onAddToCart }) => {
         <View className="flex-1 items-end justify-evenly p-4 h-full">
             <Text className="text-white text-3xl font-bold">{cookie.name}</Text>
             <Text className="text-white">{cookie.description}</Text>
-            <StyledPressable className="bg-primary px-4 py-2 rounded-xl" onPress={onAddToCart}>
+            <StyledPressable className="bg-primary px-4 py-2 rounded-xl" onPress={() => onAddToCart(cookie)}>
               <Text>
                 Add to cart
               </Text>
