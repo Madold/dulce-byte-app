@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "dulce-byte-app",
+    "name": "Dulce Bite",
     "slug": "dulce-byte-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -30,13 +30,21 @@
     },
     "plugins": [
       "expo-router",
-      ["expo-build-properties", {
-        "ios": {
-          "useFrameworks": "static"
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
         }
-      }],
+      ],
       "@react-native-firebase/app",
       "@react-native-firebase/auth"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "828a7f5a-d3dd-440b-96b6-fa8f7443bfd3"
+      }
+    }
   }
 }
