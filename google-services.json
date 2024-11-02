@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "850245176593",
     "project_id": "dulce-bite",
-    "storage_bucket": "dulce-bite.appspot.com"
+    "storage_bucket": "dulce-bite.firebasestorage.app"
   },
   "client": [
     {
@@ -19,6 +19,14 @@
           "android_info": {
             "package_name": "com.markusw.dulcebite",
             "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "850245176593-sfhqfvdrht6spaliocflp83taq12da3k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.markusw.dulcebite",
+            "certificate_hash": "d9a7e4e0d4d4955d40fe0a6c481662e64cef84b0"
           }
         },
         {
