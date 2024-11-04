@@ -4,7 +4,7 @@ const state = {
   orders: [],
   isLoading: true,
   order: null,
-  isFetchinOrder: true,
+  isFetchingOrder: true,
 };
 
 export const ordersSlice = createSlice({
@@ -21,7 +21,7 @@ export const ordersSlice = createSlice({
       state.order = action.payload;
     },
     setIsFetchingOrder: (state, action) => {
-      state.isFetchinOrder = action.payload;
+      state.isFetchingOrder = action.payload;
     },
   },
 });
