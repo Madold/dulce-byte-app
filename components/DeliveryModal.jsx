@@ -5,9 +5,9 @@ import { useState } from "react";
 const StyledPressable = styled(Pressable);
 
 const formResult = {
-    address: "",
-    phone: "",
-}
+  address: "",
+  phone: "",
+};
 
 export const DeliveryModal = ({ visible, onClose, onSubmit }) => {
   const [formState, setformState] = useState({

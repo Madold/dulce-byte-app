@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { Screen, SearchBar } from "../../components";
-import { Stack } from "expo-router";
+import { Link, Stack } from "expo-router";
 import Feather from "@expo/vector-icons/Feather";
 import { useDispatch, useSelector } from "react-redux";
 import { cookies } from "../../data";
@@ -45,17 +45,21 @@ export const Home = () => {
     setInputDialogVisible(true);
   };
 
-  const handleSubmitDeliveryInfo = ({ address, phone }) => { 
-    console.log(address, phone);
-  }
-
-  const handleSubmitAddress = (address) => { 
-
-  }
-
-  const hideInputDialog = () => { 
+  const handleSubmitDeliveryInfo = ({ address, phone }) => {
     setInputDialogVisible(false);
-  }
+    const order = {
+      address,
+      phone,
+      products: cart.products,
+      timestamp: Date.now(),
+    }
+
+    dispatch(placeOrder(order));
+  };
+
+  const hideInputDialog = () => {
+    setInputDialogVisible(false);
+  };
 
   const handleAddToCart = (cookie) => {
     dispatch(
@@ -76,7 +80,9 @@ export const Home = () => {
             headerLeft: () => <Text>Hola, {user.displayName}</Text>,
             headerRight: () => (
               <View className="flex flex-row gap-4 items-center">
-                <Feather name="archive" size={24} color="black" />
+                <Link href="/orders">
+                  <Feather name="archive" size={24} color="black" />
+                </Link>
                 <Pressable onPress={() => setModalVisible(true)}>
                   <Image
                     className="rounded-full"
@@ -96,13 +102,13 @@ export const Home = () => {
           onLogout={handleLogout}
         />
 
-        <DeliveryModal 
+        <DeliveryModal
           visible={isInputDialogVisible}
           onClose={hideInputDialog}
           onSubmit={handleSubmitDeliveryInfo}
         />
 
-          <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
           <Text style={{ fontFamily: "Inria-Bold" }} className="text-5xl mt-5">
             Escoje tu
           </Text>
